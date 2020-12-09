@@ -24,22 +24,25 @@ print(df.columns)
 ##                             Basic scores
 fig = plt.figure(0)
 sns.histplot(data = df, x = 'math score', hue = 'gender', multiple = 'stack')
+title = './Math score dist Gender'
+fig.savefig(fname = title,format = 'png')
 
 fig1 = plt.figure(1)
 sns.histplot(data = df, x = 'reading score', hue = 'gender', multiple = 'stack')
-
+plt.savefig('Reading score dist Gender')
 fig2 = plt.figure(2)
 sns.histplot(data = df, x = 'writing score', hue = 'gender', multiple = 'stack')
-
+plt.savefig('writing score dist Gender')
 ## How about scores via poverty
 fig3 = plt.figure(3)
 sns.histplot(data = df, x = 'math score', hue = 'lunch', multiple = 'stack')
-
+plt.savefig('Math score dist Lunch Status')
 fig4 = plt.figure(4)
 sns.histplot(data = df, x = 'reading score', hue = 'lunch', multiple = 'stack')
-
+plt.savefig('reading score dist Lunch Status')
 fig5 = plt.figure(5)
 sns.histplot(data = df, x = 'writing score', hue = 'lunch', multiple = 'stack')
+plt.savefig('writing score dist Lunch Status')
 
 print(df['math score'].mean(), df.groupby('test preparation course')['math score'].mean())
 print(df['reading score'].mean(), df.groupby('test preparation course')['reading score'].mean())
@@ -51,14 +54,15 @@ print(df['writing score'].mean(), df.groupby('test preparation course')['writing
 
 fig6 = plt.figure(6)
 sns.violinplot(data = df, x='race/ethnicity', y = 'math score')
+plt.savefig('Violin plot math score per race')
 
 
 fig7 = plt.figure(7)
 sns.violinplot(data = df, x='race/ethnicity', y = 'reading score')
-
+plt.savefig('Violin plot reading score per race')
 fig8 = plt.figure(8)
 sns.violinplot(data = df, x='race/ethnicity', y = 'writing score')
-
+plt.savefig('Violin plot writing score per race')
 print(df['math score'].mean(), df.groupby('race/ethnicity')['math score'].mean())
 print(df['reading score'].mean(), df.groupby('race/ethnicity')['reading score'].mean())
 print(df['writing score'].mean(), df.groupby('race/ethnicity')['writing score'].mean())
@@ -67,28 +71,31 @@ print(df['writing score'].mean(), df.groupby('race/ethnicity')['writing score'].
 fig9 = plt.figure(9)
 sns.violinplot(data = df, x='parental level of education', y = 'math score')
 plt.xticks(rotation=45)
-
+plt.savefig('Violin plot math score per parental education')
 fig10 = plt.figure(10)
 sns.violinplot(data = df, x='parental level of education', y = 'reading score')
 plt.xticks(rotation=45)
+plt.savefig('Violin plot reading score per parental education')
 
 fig11 = plt.figure(11)
 sns.violinplot(data = df, x= 'parental level of education', y = 'writing score')
 plt.xticks(rotation=45)
+plt.savefig('Violin plot writing score per parental education')
 
 print(df['math score'].mean(), df.groupby('parental level of education')['math score'].mean())
 print(df['reading score'].mean(), df.groupby('parental level of education')['reading score'].mean())
 print(df['writing score'].mean(), df.groupby('parental level of education')['writing score'].mean())
 
 
-#                       count plots, I want to see the break down of
-Students and their financials
+# count plots, I want to see the break down of Students and their financials
 
 fig12 = plt.figure(12)
 sns.countplot(data = df, y = 'race/ethnicity', hue = 'lunch')
+plt.savefig('Count plot race vs lunch ')
 
 fig13 = plt.figure(13)
 sns.countplot(data = df, y='parental level of education', hue = 'lunch')
+plt.savefig('Count plot parental education vs lunch ')
 #Interesting to see how the parental edcuation level affects the childs overall
 #poverty level. However, need to be careful because we don't see easy relatable data here
 #For instance, it appears that at a glance some college has more free/reduced lunches
@@ -180,8 +187,8 @@ print(mlr.score(x_train, y_train))
 print("Test score:")
 print(mlr.score(x_test, y_test))
 plt.figure(20)
-plt.scatter(y_test, y_predict)
-
+plt.scatter(y_test, y_predict,alpha = 0.2)
+plt.savefig('Scatter plot of predicted scores vs actual scores - writing (Full features)')
 print(mlr_model.coef_)
 #So this modle isn't very strong. Probably this data isn't enough to really tell us if they'll do good on individual exams
 # However, lets say we're happy with a mean squared error of .38 (explained ~38% of scores). 
@@ -203,7 +210,8 @@ print(mlr.score(x_train, y_train))
 print("Test score:")
 print(mlr.score(x_test, y_test))
 plt.figure(21)
-plt.scatter(y_test, y_predict)
+plt.scatter(y_test, y_predict, alpha = 0.2)
+plt.savefig('Scatter plot of predicted scores vs actual scores - writing (reduced Features)')
 #This score is .321, so we didn't lose a ton here dropping parental level. If our data was MASSIVE
 # we could save time/resources skipping this model. 
 
